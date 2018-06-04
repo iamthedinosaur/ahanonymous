@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,8 +15,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -24,8 +34,10 @@ import java.util.List;
  */
 public class FragmentProfile extends Fragment {
     private QuestionAdapter questionAdapter;
-    private ImageView addQuestion;
+    private TextView addQuestion;
     private RecyclerView recycleQuestions;
+    private EventBus bus = EventBus.getDefault();
+    private List<Question> questionList = new ArrayList<>();
 
     public FragmentProfile() {
         // Required empty public constructor
@@ -46,22 +58,50 @@ public class FragmentProfile extends Fragment {
 
         recycleQuestions = (RecyclerView)rootView.findViewById(R.id.recycleQuestions);
         recycleQuestions.setLayoutManager(new LinearLayoutManager(getContext()));
-        updateQuestionUI();
 
-        addQuestion = (ImageView)rootView.findViewById(R.id.addQuestion);
-        addQuestion.setOnClickListener();
+        addQuestion = (TextView)rootView.findViewById(R.id.addQuestion);
+        addQuestion.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                AskQuestionDialogFragment dialogFragment = new AskQuestionDialogFragment();
+                dialogFragment.show(((FragmentActivity)getContext()).getFragmentManager(), "start");
+            }
+        });
 
         return rootView;
     }
 
-    private void updateQuestionUI(){
-        List<Question> questionList = new ArrayList<>();
-        questionList.add(new Question("Which is the better course? Android App Development or AP Comp Sci?", "5/22/18 2:42", R.drawable.dom, "♂ 10", "Dominick DeSeta", "@iamthedinosaur"));
-        questionList.add(new Question("Who is the best student of the Android App Development class?", "5/23/18 3:42", R.drawable.dom, "♂ 10", "Dominick DeSeta", "@iamthedinosaur"));
-        questionList.add(new Question("Who would win in a fight? Danny Devito or Thanos from the MCU? (With the infinity gauntlet)", "5/24/18 4:42", R.drawable.dom, "♂ 10", "Dominick DeSeta", "@iamthedinosaur"));
-        questionList.add(new Question("What is my middle name? I will legally change it to what's said by whoever replies first.", "5/25/18 5:42", R.drawable.dom, "♂ 10", "Dominick DeSeta", "@iamthedinosaur"));
-        questionList.add(new Question("Is Arjun even a real human being? Or is he a manifestation of the spirit of a potato? The world may never know.", "5/26/18 6:42", R.drawable.dom, "♂ 10", "Dominick DeSeta", "@iamthedinosaur"));
+    private void updateQuestionUI(Question question){
+        if(question != null){
+            questionList.add(question);
+        }
         questionAdapter = new QuestionAdapter(questionList, getContext(), getResources(),false);
         recycleQuestions.setAdapter(questionAdapter);
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        bus.register(this);
+        updateQuestionUI(null);
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        bus.unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(QuestionAskedEvent event){
+        Question question = null;
+        String timeStamp = new SimpleDateFormat("M/d h:ma").format(Calendar.getInstance().getTime());
+        if(event.postAnonymously){
+            question = new Question(event.question, timeStamp, R.drawable.ic_help_gray_24dp,
+                    "♂ 10", "Dominick DeSeta", "@iamthedinosaur");
+        }else{
+            question = new Question(event.question, timeStamp, R.drawable.dom,
+                    "♂ 10", "Dominick DeSeta", "@iamthedinosaur");
+        }
+        updateQuestionUI(question);
     }
 }
