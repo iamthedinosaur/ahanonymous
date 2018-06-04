@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentChat">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp">
+
+        <TextView
+            android:id="@+id/noChatsText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="You seem to have no chats started... click on a reply to one of your questions to change that!"
+            android:textColor="#000"
+            android:gravity="center_horizontal"
+            android:textSize="25sp"
+            android:layout_marginTop="20dp"/>
+
+        <ImageView
+            android:id="@+id/noChatsImage"
+            android:layout_marginTop="20dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_below="@id/noChatsText"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/think"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycleChats"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+        </android.support.v7.widget.RecyclerView>
+
+    </RelativeLayout>
+</FrameLayout>

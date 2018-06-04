@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:layout_marginTop="20dp">
+
+    <ImageView
+        android:id="@+id/profPic"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/dom"
+        android:visibility="gone"
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:id="@+id/realName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/profPic"
+        android:text="Dominick DeSeta"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="-3dp"
+        android:layout_marginBottom="-5dp"
+        android:textSize="25sp"
+        android:textColor="#000"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/profPic"
+        android:layout_below="@id/realName"
+        android:text="\@iamthedinosaur"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
+        android:textSize="15sp"
+        android:textColor="#3F51B5"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/username"
+        android:layout_below="@id/realName"
+        android:text="♂ 10"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
+        android:textSize="15sp"
+        android:textColor="#63b3ff"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profPic"
+        android:text="So I've been thinking lately. Who would win in a fight? Danny Devito, or Thanos from the Marvel Universe (with the Infinity Quantlet)?"
+        android:textStyle="normal"
+        android:layout_marginTop="0dp"
+        android:textSize="20sp"
+        android:textColor="#000"/>
+
+    <EditText
+        android:id="@+id/enterReply"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/question"
+        android:layout_toLeftOf="@id/sendReply"
+        android:hint="Enter reply here..."
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/sendReply"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/ic_send_black_24dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/question"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/questionTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/enterReply"
+        android:text="5/22/18 2:42"
+        android:textStyle="normal"
+        android:layout_marginTop="5dp"
+        android:textSize="15sp"
+        android:textColor="#3F51B5"/>
+
+    <Button
+        android:id="@+id/viewReplies"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/enterReply"
+        android:text="↓ View Replies"
+        android:textStyle="normal"
+        android:layout_marginTop="-8dp"
+        android:layout_alignParentRight="true"
+        android:textSize="15sp"
+        android:textColor="#63b3ff"
+        android:background="#00ffffff"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycleReplies"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/viewReplies"
+        android:visibility="gone">
+    </android.support.v7.widget.RecyclerView>
+
+    <View
+        android:id="@+id/lineSeparator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/recycleReplies"
+        android:layout_marginTop="15dp"
+        android:background="#ededed"/>
+</RelativeLayout>

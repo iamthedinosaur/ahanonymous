@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentProfile">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp">
+
+        <ImageView
+            android:id="@+id/profPic"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/dom"
+            android:layout_marginTop="25dp"/>
+
+        <TextView
+            android:id="@+id/realName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/profPic"
+            android:text="Dominick DeSeta"
+            android:textStyle="bold"
+            android:layout_marginTop="18dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="-5dp"
+            android:textSize="25sp"
+            android:textColor="#000"/>
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/profPic"
+            android:layout_below="@id/realName"
+            android:text="\@iamthedinosaur"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"
+            android:textSize="15sp"
+            android:textColor="#3F51B5"/>
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/username"
+            android:layout_below="@id/realName"
+            android:layout_marginLeft="10dp"
+            android:text="♂ 10"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textColor="#63b3ff"/>
+
+        <TextView
+            android:id="@+id/addQuestion"
+            android:layout_width="wrap_content"
+            android:background="@drawable/border"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/profPic"
+            android:layout_below="@id/status"
+            android:layout_marginLeft="10dp"
+            android:text="Ask Question"
+            android:layout_marginTop="3dp"
+            android:textColor="#63b3ff"
+            android:padding="10dp"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/bio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/profPic"
+            android:text="What up guys and gals. It's ya boi Dominick, back at it again with another Fortnite video."
+            android:textStyle="normal"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
+            android:textColor="#3F51B5"/>
+
+        <View
+            android:id="@+id/lineSeparator"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_below="@id/bio"
+            android:layout_marginTop="10dp"
+
+            android:background="#3F51B5"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycleQuestions"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/lineSeparator">
+        </android.support.v7.widget.RecyclerView>
+    </RelativeLayout>
+</FrameLayout>
